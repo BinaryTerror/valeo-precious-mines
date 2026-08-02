@@ -66,7 +66,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <img src="/image_copy.png" alt="Diamante azul 3D" className="hero-gem" />
+        <img src="./image_copy.png" alt="Diamante azul 3D" className="hero-gem" />
       </div>
 
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[2] flex flex-col items-center gap-2.5 font-mono text-[11px] tracking-[0.14em] uppercase text-ice/50">

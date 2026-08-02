@@ -10,7 +10,7 @@ export default function Footer() {
     <footer className="bg-navy-deep border-t border-white/10 py-11">
       <div className="max-w-[1200px] mx-auto px-8 sm:px-5 flex flex-wrap items-center justify-between gap-4.5 gap-[18px]">
         <div className="flex items-center gap-3">
-          <img src="/logo.jpg" alt="Valeo Precious Mines" className="h-[30px]" />
+          <img src="./logo.jpg" alt="Valeo Precious Mines" className="h-[30px]" />
           <span className="text-ice/55 text-[13px]">
             © {new Date().getFullYear()} Valeo Precious Mines. Todos os direitos reservados.
           </span>
