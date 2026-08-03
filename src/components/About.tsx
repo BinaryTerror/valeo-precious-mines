@@ -1,71 +1,60 @@
-import Reveal from './Reveal'
+import Reveal from './Reveal';
+import aboutTeam from '../../public/about-team.jpg';
 
-const VALUES = [
-  {
-    title: 'Rastreabilidade',
-    desc: 'Registo documentado desde a mina até à entrega ao cliente.',
-    path: 'M12 2 L20 8 L20 16 L12 22 L4 16 L4 8 Z',
-  },
-  {
-    title: 'Operação responsável',
-    desc: 'Práticas éticas e ambientalmente sustentáveis em cada etapa.',
-    path: 'M12 7v5l3 3',
-    circle: true,
-  },
-  {
-    title: 'Capacidade logística',
-    desc: 'Armazenamento seguro e transporte para mercados nacionais e globais.',
-    path: 'M3 12h4l3 8 4-16 3 8h4',
-  },
-]
+const pillars = [
+  { title: 'Operações integradas', text: 'Prospeção, extração, processamento e logística em uma única cadeia de valor.' },
+  { title: 'Parcerias locais', text: 'Fortalecemos comunidades e fornecedores com programas de desenvolvimento sustentável.' },
+  { title: 'Transparência', text: 'Cada etapa é acompanhada por processos claros, rastreáveis e confiáveis.' },
+  { title: 'Excelência operacional', text: 'Padrões elevados de segurança, qualidade e responsabilidade ambiental.' },
+];
 
-export default function About() {
+const About = () => {
   return (
-    <section id="sobre" className="py-24 sm:py-32">
-      <div className="max-w-[1200px] mx-auto px-8 sm:px-5 grid grid-cols-1 md:grid-cols-[0.9fr_1.1fr] gap-10 md:gap-16 items-start">
-        <Reveal>
-          <div className="flex items-center gap-2.5 mb-4 font-mono text-xs tracking-[0.14em] uppercase text-gold before:content-[''] before:w-[22px] before:h-px before:bg-gold">
-            Quem somos
-          </div>
-          <h2 className="font-display font-semibold text-ink text-[26px] sm:text-[32px] lg:text-[36px] mb-6">
-            Uma empresa moçambicana construída sobre rigor técnico e relações de confiança.
-          </h2>
-          <div className="space-y-4 text-[#3c4c5c] text-base">
-            <p>
-              A <strong className="text-navy">Valeo Precious Mines</strong> actua ao longo de toda a
-              cadeia de valor mineira: prospecção, exploração, extracção, processamento,
-              armazenamento, transporte e comercialização de pedras preciosas, ouro e outros minerais
-              em Moçambique.
-            </p>
-            <p>
-              Trabalhamos com parceiros, investidores e compradores internacionais, assegurando que
-              cada operação cumpre os padrões legais e ambientais exigidos, desde a licença de
-              exploração até à certificação final do produto.
-            </p>
-          </div>
-        </Reveal>
+    <section id="sobre" className="bg-warm py-20 lg:py-28">
+      <div className="page-container mx-auto px-4 lg:px-8">
+        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+          <Reveal direction="up">
+            <div className="rounded-[2rem] border border-[#e7dfd4] bg-white p-8 shadow-sm lg:p-10">
+              <div className="section-label text-accent font-display font-semibold text-sm uppercase tracking-wider mb-4">
+                QUEM SOMOS
+              </div>
+              <h2 className="font-display text-3xl lg:text-4xl font-bold text-ink mb-6">
+                A Valeo é a empresa responsável pela operação de minas de <span className="text-accent">pedras preciosas</span>
+              </h2>
+              <div className="font-body text-base text-gray-600 leading-relaxed space-y-4">
+                <p>
+                  Somos uma empresa de mineração moçambicana com foco em pedras preciosas, ouro e minerais essenciais. Atuamos em toda a cadeia de valor, desde a prospeção até à comercialização, com responsabilidade social e ambiental.
+                </p>
+                <p>
+                  Em conjunto com os nossos parceiros comerciais, compradores internacionais e investidores, trabalhamos diariamente para agregar valor e garantir excelência operacional em cada projeto.
+                </p>
+              </div>
 
-        <Reveal>
-          <div className="relative glass-card p-8">
-            <div className="relative grid gap-5">
-              {VALUES.map((v) => (
-                <div key={v.title} className="flex gap-4 items-start card-hover hover-target">
-                  <div className="flex-none w-11 h-11 flex items-center justify-center bg-navy text-gold-soft hex-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
-                      {v.circle && <circle cx="12" cy="12" r="9" />}
-                      <path d={v.path} />
-                    </svg>
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                {pillars.map((pillar) => (
+                  <div key={pillar.title} className="clean-card">
+                    <h3 className="font-display font-semibold text-base text-ink">{pillar.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-gray-600">{pillar.text}</p>
                   </div>
-                  <div>
-                    <h4 className="text-[15.5px] text-navy font-semibold mb-1">{v.title}</h4>
-                    <p className="text-sm text-[#4a5b6d]">{v.desc}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+
+          <Reveal direction="right" delay={120}>
+            <div className="relative overflow-hidden rounded-[2rem] min-h-[420px] shadow-sm">
+              <img src={aboutTeam} alt="Equipa Valeo" className="h-full w-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                <p className="section-label mb-2 text-white/80">Presença local</p>
+                <h3 className="font-display text-2xl font-semibold">Operações que geram impacto positivo nas regiões onde atuamos.</h3>
+              </div>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
-  )
-}
+  );
+};
+
+export default About;

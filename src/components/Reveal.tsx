@@ -3,9 +3,18 @@ import { useEffect, useRef, type ReactNode } from 'react'
 interface RevealProps {
   children: ReactNode
   className?: string
+  direction?: 'up' | 'down' | 'left' | 'right' | 'zoom'
+  delay?: number // ms
+  duration?: number // ms, default 850
 }
 
-export default function Reveal({ children, className = '' }: RevealProps) {
+export default function Reveal({
+  children,
+  className = '',
+  direction,
+  delay,
+  duration,
+}: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -27,7 +36,15 @@ export default function Reveal({ children, className = '' }: RevealProps) {
   }, [])
 
   return (
-    <div ref={ref} className={`reveal ${className}`}>
+    <div
+      ref={ref}
+      className={`reveal ${className}`}
+      data-direction={direction}
+      style={{
+        transitionDelay: delay !== undefined ? `${delay}ms` : undefined,
+        transitionDuration: duration !== undefined ? `${duration}ms` : undefined,
+      }}
+    >
       {children}
     </div>
   )

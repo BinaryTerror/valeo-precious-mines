@@ -1,78 +1,73 @@
-const STATS = [
-  { num: '04', label: 'Áreas de recursos: pedras preciosas, ouro, minerais e cobre' },
-  { num: '—', label: 'Projetos em desenvolvimento' },
-  { num: 'MZ', label: 'Presença nacional, ligação a mercados internacionais' },
-]
+import { useState, useEffect } from 'react';
+import Reveal from './Reveal';
+import hero1 from '../../public/hero-1.jpg';
+import hero2 from '../../public/hero-2.jpg';
+import hero3 from '../../public/hero-3.jpg';
+
+const SLIDES = [
+  { image: hero1, title: 'Bem-vindo à', highlight: 'Valeo', subtitle: '' },
+  { image: hero2, title: 'Pedras preciosas de', highlight: 'Moçambique', subtitle: '' },
+  { image: hero3, title: 'Crescer juntos,', highlight: 'sempre.', subtitle: '' },
+];
 
 export default function Hero() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % SLIDES.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className="relative min-h-screen flex items-center pt-[100px] overflow-hidden">
-      <svg
-        className="absolute inset-0 w-full h-full opacity-90 pointer-events-none"
-        viewBox="0 0 1400 900"
-        preserveAspectRatio="xMidYMid slice"
-      >
-        <g stroke="rgba(74,144,217,0.16)" strokeWidth={1} fill="none">
-          <polygon points="1050,60 1250,140 1220,340 1000,300" />
-          <polygon points="1250,140 1400,220 1380,420 1220,340" />
-          <polygon points="1000,300 1220,340 1150,560 950,520" />
-          <polygon points="1220,340 1380,420 1330,620 1150,560" />
-          <polygon points="950,520 1150,560 1080,760 900,720" />
-          <polygon points="1150,560 1330,620 1260,820 1080,760" />
-        </g>
-        <g stroke="rgba(201,155,63,0.14)" strokeWidth={1} fill="none">
-          <polygon points="80,520 260,470 300,650 140,700" />
-          <polygon points="260,470 420,510 400,690 300,650" />
-        </g>
-      </svg>
-
-      <div className="relative z-[2] max-w-[1200px] mx-auto px-8 sm:px-5 grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr] gap-14 items-center w-full">
-        <div>
-          <div className="flex items-center gap-2.5 mb-4 font-mono text-xs tracking-[0.14em] uppercase text-gold before:content-[''] before:w-[22px] before:h-px before:bg-gold">
-            Moçambique · Recursos Minerais
-          </div>
-          <h1 className="font-display font-semibold text-white leading-[1.06] text-[38px] sm:text-[48px] lg:text-[64px] mb-6">
-            Da rocha à joia,
-            <br />
-            do subsolo ao <span className="text-gold">mercado global.</span>
-          </h1>
-          <p className="text-ice/80 text-lg max-w-[520px] mb-9">
-            A Valeo Precious Mines está a desenvolver oportunidades no setor de recursos minerais em
-            Moçambique, com foco em práticas responsáveis e transparência nas operações futuras.
-          </p>
-
-          <div className="flex gap-4 flex-wrap mb-14">
-            <a
-              href="#servicos"
-              className="inline-flex items-center gap-2.5 bg-gold text-navy-deep px-7 py-4 text-sm font-semibold tracking-wide hover:bg-gold-soft hover:-translate-y-0.5 transition-all hover-target"
-            >
-              Ver o que oferecemos →
-            </a>
-            <a
-              href="#contacto"
-              className="border border-white/15 text-white px-7 py-4 text-sm font-medium hover:border-gold hover:bg-white/5 transition-all hover-target"
-            >
-              Falar com um especialista
-            </a>
-          </div>
-
-          <div className="grid grid-cols-3 border-t border-white/15 pt-6 max-w-[560px]">
-            {STATS.map((s) => (
-              <div key={s.num} className="pr-4">
-                <span className="block font-mono text-gold-soft text-2xl font-medium mb-1.5">{s.num}</span>
-                <span className="text-ice/60 text-xs leading-snug">{s.label}</span>
-              </div>
-            ))}
-          </div>
+    <section className="relative h-screen w-full overflow-hidden bg-navy-deep">
+      {SLIDES.map((slide, index) => (
+        <div
+          key={slide.title}
+          className={`hero-slide absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+            index === activeSlide ? 'active opacity-100 z-10' : 'opacity-0 z-0'
+          }`}
+          style={{
+            backgroundImage: `url(${slide.image})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20" />
         </div>
+      ))}
 
-        <img src="./image_copy.png" alt="Diamante azul 3D" className="hero-gem" />
+      <div className="relative z-20 container mx-auto px-4 lg:px-8 h-full flex flex-col justify-center">
+        <Reveal direction="up" delay={200} duration={800}>
+          <div className="hero-content max-w-4xl">
+            <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-tight">
+              {SLIDES[activeSlide].title} <br className="hidden md:block" />
+              <span className="text-accent">{SLIDES[activeSlide].highlight}</span> {SLIDES[activeSlide].subtitle}
+            </h1>
+            
+            {activeSlide === 0 && (
+              <div className="mt-8 flex items-center gap-4">
+                <span className="text-white/80 font-body text-sm tracking-wider uppercase border border-white/30 px-3 py-1 rounded">ISO 9001</span>
+                <span className="text-white/80 font-body text-sm tracking-wider uppercase border border-white/30 px-3 py-1 rounded">ISO 14001</span>
+              </div>
+            )}
+          </div>
+        </Reveal>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-[2] flex flex-col items-center gap-2.5 font-mono text-[11px] tracking-[0.14em] uppercase text-ice/50">
-        <span>Explorar</span>
-        <span className="w-px h-[34px] bg-gradient-to-b from-gold to-transparent animate-scrollcue" />
+      <div className="hero-dots absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-3 rounded-full bg-black/25 px-4 py-3 backdrop-blur-sm">
+        {SLIDES.map((slide, index) => (
+          <button
+            key={slide.title}
+            onClick={() => setActiveSlide(index)}
+            className={`hero-dot w-3 h-3 rounded-full border border-white/70 transition-all duration-300 ${
+              index === activeSlide ? 'active bg-accent scale-125 border-accent shadow-[0_0_0_4px_rgba(244,124,32,0.2)]' : 'bg-white/70 hover:bg-white'
+            }`}
+            aria-label={`Go to slide ${index + 1}`}
+          />
+        ))}
       </div>
     </section>
-  )
+  );
 }
