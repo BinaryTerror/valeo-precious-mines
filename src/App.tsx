@@ -1,7 +1,6 @@
 import Layout from './components/Layout'
 import Hero from './components/Hero'
 import About from './components/About'
-import Publications from './components/Publications'
 import Services from './components/Services'
 import Certification from './components/Certification'
 import Sustainability from './components/Sustainability'
@@ -12,7 +11,6 @@ export default function App() {
     <Layout>
       <Hero />
       <About />
-      <Publications />
       <Services />
       <Certification />
       <Sustainability />
